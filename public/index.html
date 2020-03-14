@@ -5,9 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Content Predictor</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">   
 </head>
 <body>
+    <div class="container">
     <h1>Welcome to the student content predictor app!</h1>
-    
+    <form action="/" method="POST">
+        <label for="student-name">Student's Name: </label><br>
+        <input type="text" id="student-name" name="student-name"><br>
+        <label for="class-code">Student's Class Code: </label><br>
+        <input type="text" id="class-code" name="class-code"><br>
+        <label for="grad-date">Student's Graduation Date: </label><br>
+        <input type="date" id="grad-date" name="grad-date"><br>
+        <label for="class-type">Student's Class Type: </label><br>
+        <select id="class-type" name="class-type">
+            <option value="part-time">Part Time</option>
+            <option value="full-time">Full Time</option>
+        </select><br><br>
+        <input id="student-submit" type="submit">
+
+    </form>
+</div>
+    <script type="text/javascript" src="./js/student.js"></script>
 </body>
 </html>
