@@ -2,10 +2,10 @@ var Sequelize = require('sequelize');
 var sequelize = require('../config/connection');
 
 var Student = sequelize.define('students', {
-    student: Sequelize.STRING,
+    studentName: Sequelize.STRING,
     classCode: Sequelize.STRING,
-    graduateDate: Sequelize.DATE,
-    classLength: Sequelize.STRING
+    gradDate: Sequelize.DATE,
+    classType: Sequelize.STRING
 });
 
 Student.sync();
