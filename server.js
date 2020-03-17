@@ -14,12 +14,13 @@ app.use(express.static("public"));
 //TEST ROUTE
 
 require('./routes/htmlRoutes.js')(app);
+require('./routes/apiRoutes')(app);
 
 // app.get('/', (req, res) => {
 //     res.send('testing to make sure the route works');
 // });
-db.sequelize.sync({ force: true}).then(function() {
+// db.sequelize.sync({ force: true}).then(function() {
     app.listen(PORT, () => {
         console.log(`App listening on PORT ${PORT}`);
     });
-});
+// });

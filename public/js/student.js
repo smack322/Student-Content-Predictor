@@ -23,3 +23,19 @@ $('#student-submit').on('click', function(event) {
     })
 })
 
+$.get('/api/all/', function(data) {
+    console.log('data' + data);
+    if (data.length !== 0) {
+        for (var i = 0; i < data.length; i++) {
+            var row = $("<div>");
+
+            row.append("<p>" + data[i].studentName);
+            row.append("<p>" + data[i].classCode);
+            row.append("<p>" + data[i].gradDate);
+            row.append("<p>" + data[i].classType);
+
+            $('#student-data').prepend(row);
+        }
+    }
+});
+

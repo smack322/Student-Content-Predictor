@@ -1,9 +1,10 @@
 var Student = require('../models/students');
+// var db = require('./models/students');
 
 module.exports = function(app) {
     //add CRUD routes in for backend
-    app.get('/api/student', function(req, res) {
-        db.Student.findAll({})
+    app.get('/api/all/', function(req, res) {
+        Student.findAll({})
            .then(function(dbStudent) {
                res.json(dbStudent);
            });
@@ -11,8 +12,8 @@ module.exports = function(app) {
 
     app.post('/api/student', function(req, res) {
         console.log(req.body);
-        db.Student.create({
-            studentName: req.body.student,
+        Student.create({
+            studentName: req.body.studentName,
             classCode: req.body.classCode,
             gradDate: req.body.gradDate,
             classType: req.body.classType
