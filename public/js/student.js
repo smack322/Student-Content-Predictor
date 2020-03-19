@@ -23,12 +23,18 @@ $('#student-submit').on('click', function(event) {
     })
 })
 
+var updateBtn = $("<button type=submit> Update</button>");
+var deleteBtn = $("<button type=submit> X </button>");
+
 $.get('/api/all/', function(data) {
     console.log('data' + data);
     if (data.length !== 0) {
         for (var i = 0; i < data.length; i++) {
             var row = $("<div>");
+            var button = $("<div>")
 
+            row.append(updateBtn);
+            row.append(deleteBtn);
             row.append("<p>" + data[i].studentName);
             row.append("<p>" + data[i].classCode);
             row.append("<p>" + data[i].gradDate);
