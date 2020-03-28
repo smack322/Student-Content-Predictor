@@ -23,21 +23,50 @@ $('#student-submit').on('click', function(event) {
     })
 })
 
-var updateBtn = $("<button type=submit> Update</button>");
-var deleteBtn = $("<button type=submit> X </button>");
+//click events for the delete and edit buttons
+$(document).on('click', 'button.delete', handleStudentDelete);
+
+$(document).on('click', 'button.edit', function(){
+    alert('You clicked the button to edit a post!');
+})
+
 var studentContainer = $("#student-data");
 
-$.get('/api/all/', function(data) {
-    posts = data;
-    console.log('data' + data);
-    if(!posts || !posts.length) {
-        noStudents();
-    }
-    else {
-        startRow();
-    }
-});
+function getStudentData() {
+    $.get('/api/all/', function(data) {
+        posts = data;
+        console.log('data' + data);
+        if(!posts || !posts.length) {
+            noStudents();
+        }
+        else {
+            startRow();
+        }
+    });
+}
+getStudentData()
 
+function deleteStudent() {
+    $.ajax({
+        method: `DELETE`,
+        url: `/api/all/ ${id}` 
+    })
+    .then(function() {
+        getStudentData();
+    })
+}
+
+//ensure the delete is on the specific student based on the button
+function handleStudentDelete() {
+    var currentPost = $(this)
+      .parent()
+      .parent()
+      .data("post");
+      deleteStudent(currentPost.id);
+      console.log(currentPost);
+  }
+
+//creates a row with student data from the db
 function startRow() {
     var postsToCreate = [];
 
@@ -48,12 +77,13 @@ function startRow() {
 
 }
 
+//fields that are used from the db for the student row
 function createStudentRow(data) {
     var row = $("<div>");
-    var deleteBtn = $("<button>");
-    deleteBtn.text("X");
-    var editBtn = $("<button>");
-    editBtn.text("EDIT");
+    var deleteBtn = $("<button class=delete>");
+    deleteBtn.html("X");
+    var editBtn = $("<button class=edit>");
+    editBtn.html("EDIT");
     //append children to div
     row.append(deleteBtn);
     row.append(editBtn);
@@ -69,6 +99,7 @@ function createStudentRow(data) {
     
 }
 
+//if there are no students then, instruct the user to use the form to add a student
 function noStudents() {
     studentContainer.empty();
     var title = $("<h2>")
